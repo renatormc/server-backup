@@ -15,11 +15,11 @@ type Config struct {
 	BackupFolder      string `json:"backup_folder"`
 	FilesBackupFolder string
 	DBBackupFolder    string
-	PgHost            string `json:"pg_host"`
-	PgUser            string `json:"pg_user"`
-	PgPassword        string `json:"pg_password"`
-	PgPort            string
-	PgDBName          string
+	PgHost            string   `json:"pg_host"`
+	PgUser            string   `json:"pg_user"`
+	PgPassword        string   `json:"pg_password"`
+	PgPort            string   `json:"pg_port"`
+	PgDBName          string   `json:"pg_db_name"`
 	BackupTimes       []string `json:"backup_times"`
 	BackupDB          bool     `json:"backup_db"`
 	BackupFiles       bool     `json:"backup_files"`
@@ -39,7 +39,7 @@ func LoadConfig(name string) Config {
 	config.AppDir = filepath.Dir(ex)
 
 	configFolder := filepath.Join(config.AppDir, "config")
-	if DirectoryExists(configFolder) {
+	if !DirectoryExists(configFolder) {
 		if err := os.MkdirAll(configFolder, os.ModePerm); err != nil {
 			panic(err)
 		}

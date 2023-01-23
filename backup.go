@@ -41,6 +41,7 @@ func BackupDB() {
 	}
 	defer outfile.Close()
 	cmd.Stdout = outfile
+	cmd.Stderr = os.Stderr
 	cmd.Env = os.Environ()
 	cmd.Env = append(cmd.Env, fmt.Sprintf("PGPASSWORD=%s", cf.PgPassword))
 	err = cmd.Run()

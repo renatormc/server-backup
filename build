@@ -1,0 +1,9 @@
+
+#!/bin/bash -i
+CURRENT_DIR=$(pwd) &&
+SRC_FOLDER="./dist" &&
+go  build -o $SRC_FOLDER/server-backup &&
+if [ "$#" -ne 0 ]; then
+    cd $SRC_FOLDER &&
+    ./server-backup $@
+fi

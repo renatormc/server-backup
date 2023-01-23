@@ -14,6 +14,7 @@ func main() {
 
 	parser := argparse.NewParser("Genial backup", "App for making backup fo genial app")
 	configName := parser.String("c", "config", &argparse.Options{Required: true, Help: "Configuration file name without extension"})
+	logToFile := parser.Flag("l", "logfile", &argparse.Options{Default: false, Help: "Logo to file instead of console"})
 
 	schedulerCmd := parser.NewCommand("scheduler", "Start scheduler")
 	backupCmd := parser.NewCommand("backup", "Make one backup")
@@ -25,15 +26,18 @@ func main() {
 	}
 
 	cf := LoadConfig(*configName)
-	f, err := os.OpenFile(filepath.Join(cf.AppDir, "log.log"), os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
-	if err != nil {
-		panic(err)
+	if *logToFile {
+		f, err := os.OpenFile(filepath.Join(cf.AppDir, "log.log"), os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+		if err != nil {
+			panic(err)
+		}
+		defer f.Close()
+		log.SetOutput(f)
 	}
-	defer f.Close()
-	log.SetOutput(f)
 
 	switch {
 	case schedulerCmd.Happened():
+
 		for _, t := range cf.BackupTimes {
 			err = gocron.Every(1).Day().At(t).Do(func() {
 				go DeleteOld()
