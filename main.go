@@ -27,7 +27,7 @@ func main() {
 
 	cf := LoadConfig(*configName)
 	if *logToFile {
-		f, err := os.OpenFile(filepath.Join(cf.AppDir, fmt.Sprintf("%s.log", *configName)), os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
+		f, err := os.OpenFile(filepath.Join(cf.AppDir, "logs", fmt.Sprintf("%s.log", *configName)), os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 		if err != nil {
 			panic(err)
 		}
