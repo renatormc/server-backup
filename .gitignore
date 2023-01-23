@@ -1,4 +1,5 @@
 dist/config
 dist/server-backup
 dist/server-backup.exe
-dirs/log.log
+dist/log.log
+dist/logs/*.log
