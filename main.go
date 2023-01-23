@@ -12,7 +12,7 @@ import (
 
 func main() {
 
-	parser := argparse.NewParser("Genial backup", "App for making backup fo genial app")
+	parser := argparse.NewParser("Server backup", "App for making backup of database and files from server")
 	configName := parser.String("c", "config", &argparse.Options{Required: true, Help: "Configuration file name without extension"})
 	logToFile := parser.Flag("l", "logfile", &argparse.Options{Default: false, Help: "Log to file instead of console"})
 

@@ -1,9 +1,13 @@
 
 #!/bin/bash -i
 CURRENT_DIR=$(pwd) &&
-SRC_FOLDER="./dist" &&
-go  build -o $SRC_FOLDER/server-backup &&
+DIST_FOLDER="./dist" &&
+go  build -o $DIST_FOLDER/server-backup &&
 if [ "$#" -ne 0 ]; then
-    cd $SRC_FOLDER &&
+    cd $DIST_FOLDER &&
     ./server-backup $@
 fi
+
+DIST_FOLDER="../dist" &&
+cd "$CURRENT_DIR/windows_runner" &&
+env GOOS=windows GOARCH=amd64 go build -o $DIST_FOLDER/server-backup-wservice.exe
