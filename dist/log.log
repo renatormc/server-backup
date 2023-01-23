@@ -1,0 +1,32 @@
+2023/01/23 14:02:06 Starting backup DB
+2023/01/23 14:02:06 exec: "pg_dump": executable file not found in %PATH%
+2023/01/23 14:02:06 Starting backup files
+2023/01/23 14:02:07 exit status 1
+2023/01/23 14:20:08 Starting backup DB
+2023/01/23 14:20:08 exec: "pg_dump": executable file not found in %PATH%
+2023/01/23 14:20:08 Starting backup files
+2023/01/23 14:20:09 exit status 1
+2023/01/23 14:38:53 Starting backup DB
+2023/01/23 14:38:53 exit status 1
+2023/01/23 14:38:53 Starting backup files
+2023/01/23 14:38:54 exit status 1
+2023/01/23 14:39:23 Starting backup DB
+2023/01/23 14:39:23 exit status 1
+2023/01/23 14:39:23 Starting backup files
+2023/01/23 14:39:24 exit status 1
+2023/01/23 14:39:49 Starting backup DB
+2023/01/23 14:39:49 exit status 1
+2023/01/23 14:39:49 Starting backup files
+2023/01/23 14:39:50 exit status 1
+2023/01/23 14:40:11 Starting backup DB
+2023/01/23 14:40:11 exit status 1
+2023/01/23 14:40:11 Starting backup files
+2023/01/23 14:40:11 exit status 1
+2023/01/23 14:42:14 Starting backup DB
+2023/01/23 14:42:15 exit status 1
+2023/01/23 14:42:15 Starting backup files
+2023/01/23 14:42:15 exit status 1
+2023/01/23 14:43:30 Starting backup DB
+2023/01/23 14:43:30 exit status 1
+2023/01/23 14:43:30 Starting backup files
+2023/01/23 14:43:31 exit status 1

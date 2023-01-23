@@ -1,0 +1,91 @@
+package main
+
+import (
+	"fmt"
+
+	"log"
+	"os"
+	"os/exec"
+	"path/filepath"
+	"strconv"
+	"strings"
+	"time"
+)
+
+func BackupFiles() {
+	log.Println("Starting backup files")
+	cf := GetConfig()
+	cmd := exec.Command("rdiff-backup", cf.Folder, cf.FilesBackupFolder)
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+	cmd.Env = os.Environ()
+	// args := []string{"rdiff-backup", cf.Folder, cf.FilesBackupFolder}
+	// err := CmdExecConsole(args...)
+	err := cmd.Run()
+	if err != nil {
+		log.Println(err.Error())
+		return
+	}
+	log.Println("Finishing backup files")
+}
+
+func BackupDB() {
+	log.Println("Starting backup DB")
+	cf := GetConfig()
+	cmd := exec.Command("pg_dump", "-d", cf.PgDBName, "-U", cf.PgUser, "-p", cf.PgPort, "-h", cf.PgHost, "-O", "-x", "-Ft")
+	filename := fmt.Sprintf("%d.tar", time.Now().Unix())
+	outfile, err := os.Create(filepath.Join(cf.DBBackupFolder, filename))
+	if err != nil {
+		log.Println(err.Error())
+		return
+	}
+	defer outfile.Close()
+	cmd.Stdout = outfile
+	cmd.Env = os.Environ()
+	cmd.Env = append(cmd.Env, fmt.Sprintf("PGPASSWORD=%s", cf.PgPassword))
+	err = cmd.Run()
+	if err != nil {
+		log.Println(err.Error())
+		return
+	}
+	log.Println("Finishing backup DB")
+}
+
+func BackupAll() {
+	cf := GetConfig()
+	if cf.BackupDB {
+		BackupDB()
+	}
+	if cf.BackupFiles {
+		BackupFiles()
+	}
+}
+
+func DeleteOld() {
+	log.Println("Deleting old dbs")
+	cf := GetConfig()
+	entries, err := os.ReadDir(cf.DBBackupFolder)
+	if err != nil {
+		log.Println(err)
+		return
+	}
+	delta := cf.DaysBeforeDelete * 24 * 60 * 60
+	for _, e := range entries {
+		if e.IsDir() {
+			continue
+		}
+		name := strings.TrimSuffix(e.Name(), filepath.Ext(e.Name()))
+		i, err := strconv.ParseInt(name, 10, 64)
+		if err != nil {
+			continue
+		}
+		if (time.Now().Unix() - delta) > i {
+			err = os.Remove(filepath.Join(cf.DBBackupFolder, e.Name()))
+			if err != nil {
+				log.Println(err)
+				continue
+			}
+		}
+
+	}
+}
