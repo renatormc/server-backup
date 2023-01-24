@@ -13,7 +13,7 @@ import (
 func main() {
 
 	parser := argparse.NewParser("Server backup windows runner", "Service to run on windows that call wsl service")
-	configName := parser.String("c", "config", &argparse.Options{Required: true, Help: "Configuration file name without extension"})
+	configName := parser.StringPositional(&argparse.Options{Required: true, Help: "Configuration file name without extension"})
 	backupTimes := parser.List("t", "time", &argparse.Options{Required: true, Help: "Backup time"})
 
 	err := parser.Parse(os.Args)
