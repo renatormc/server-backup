@@ -37,7 +37,7 @@ func BackupDB() {
 	var outfile *os.File
 	var err error
 	if cf.Docker.UsePostgresDocker {
-		cmd = exec.Command("docker", "exec", "-i", "-t", cf.Docker.ContainerName, "pg_dump", "-d", cf.PgDBName, "-U", cf.PgUser, "-p", cf.PgPort, "-h", cf.PgHost, "-O", "-x", "-Ft")
+		cmd = exec.Command("docker", "exec", "-i", cf.Docker.ContainerName, "pg_dump", "-d", cf.PgDBName, "-U", cf.PgUser, "-p", cf.PgPort, "-h", cf.PgHost, "-O", "-x", "-Ft")
 	} else {
 		cmd = exec.Command("pg_dump", "-d", cf.PgDBName, "-U", cf.PgUser, "-p", cf.PgPort, "-h", cf.PgHost, "-O", "-x", "-Ft")
 	}
