@@ -90,3 +90,14 @@ func DeleteOld() {
 
 	}
 }
+
+func SyncFolder(source, dest string) {
+	log.Println("Starting sync folders")
+	cmd := exec.Command("rsync", "-av", source, dest)
+	cmd.Stderr = os.Stderr
+	cmd.Stdout = os.Stdout
+	if err := cmd.Run(); err != nil {
+		log.Println(err)
+	}
+	log.Println("Finish sync folders")
+}

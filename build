@@ -2,7 +2,7 @@
 #!/bin/bash -i
 CURRENT_DIR=$(pwd) &&
 DIST_FOLDER="./dist" &&
-go  build -o $DIST_FOLDER/server-backup &&
+go1.19  build -o $DIST_FOLDER/server-backup &&
 if [ "$#" -ne 0 ]; then
     cd $DIST_FOLDER &&
     ./server-backup $@

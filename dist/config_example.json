@@ -1,15 +1,15 @@
 {
-    "Folder": "genial@45.82.72.14::/home/genial/src/genial/files",
-    "BackupFolder": "/media/renato/linux_data/temp/backup/",
-    "PgHost": "45.82.72.14",
-    "PgUser": "genial",
-    "PgDBName": "genial",
-    "PgPort": "5432",
-    "PgPassword": "****",
-    "BackupTimes": [
+    "folder": "user@ip:/remote/folder",
+    "backup_folder": "/path/to/backup/folder",
+    "pg_host": "ip",
+    "pg_user": "user",
+    "pg_db_name": "db_name",
+    "pg_port": "5432",
+    "pg_password": "****",
+    "gackup_times": [
         "22:41"
     ],
-    "BackupDB": true,
-    "BackupFiles": true,
-    "DaysBeforeDelete": 30
+    "backup_db": true,
+    "backup_files": true,
+    "days_before_delete": 30
 }

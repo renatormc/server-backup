@@ -18,6 +18,8 @@ func main() {
 
 	schedulerCmd := parser.NewCommand("scheduler", "Start scheduler")
 	backupCmd := parser.NewCommand("backup", "Make one backup")
+	syncFolderCmd := parser.NewCommand("sync-folder", "Sync folder")
+	schedulerSyncCmd := parser.NewCommand("scheduler-sync", "Start scheduler for sync folders")
 
 	err := parser.Parse(os.Args)
 	if err != nil {
@@ -51,5 +53,18 @@ func main() {
 		<-gocron.Start()
 	case backupCmd.Happened():
 		BackupAll()
+	case syncFolderCmd.Happened():
+		SyncFolder(cf.Folder, cf.BackupFolder)
+	case schedulerSyncCmd.Happened():
+		for _, t := range cf.BackupTimes {
+			err = gocron.Every(1).Day().At(t).Do(func() {
+				SyncFolder(cf.Folder, cf.BackupFolder)
+			})
+			if err != nil {
+				log.Fatal(err.Error())
+			}
+		}
+		log.Println("Starting scheduler")
+		<-gocron.Start()
 	}
 }
