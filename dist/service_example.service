@@ -1,0 +1,13 @@
+[Unit]
+Description=Server backup service
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=genial
+ExecStart=server-backup scheduler config_file -l
+
+[Install]
+WantedBy=multi-user.target
