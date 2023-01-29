@@ -10,9 +10,14 @@ import (
 var config Config
 
 type Config struct {
-	AppDir            string
-	Folder            string `json:"folder"`
-	BackupFolder      string `json:"backup_folder"`
+	AppDir       string
+	Folder       string `json:"folder"`
+	BackupFolder string `json:"backup_folder"`
+	Docker       struct {
+		UsePostgresDocker      bool   `json:"use_postgres_docker"`
+		ContainerName          string `json:"container_name"`
+		MountPointBackupFolder string `json:"mount_point_backup_folder"`
+	} `json:"docker"`
 	FilesBackupFolder string
 	DBBackupFolder    string
 	PgHost            string   `json:"pg_host"`

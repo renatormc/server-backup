@@ -1,6 +1,11 @@
 {
     "folder": "user@ip:/remote/folder",
     "backup_folder": "/path/to/backup/folder",
+    "docker": {
+        "use_postgres_docker": false,
+        "container_name": "",
+        "mount_point_backup_folder": ""
+    },
     "pg_host": "ip",
     "pg_user": "user",
     "pg_db_name": "db_name",

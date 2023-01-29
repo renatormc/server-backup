@@ -32,13 +32,22 @@ func BackupFiles() {
 func BackupDB() {
 	log.Println("Starting backup DB")
 	cf := GetConfig()
-	cmd := exec.Command("pg_dump", "-d", cf.PgDBName, "-U", cf.PgUser, "-p", cf.PgPort, "-h", cf.PgHost, "-O", "-x", "-Ft")
-	filename := fmt.Sprintf("%d.tar", time.Now().Unix())
-	outfile, err := os.Create(filepath.Join(cf.DBBackupFolder, filename))
+	var cmd *exec.Cmd
+	var filename string
+	var outfile *os.File
+	var err error
+	if cf.Docker.UsePostgresDocker {
+		cmd = exec.Command("docker", "exec", "-i", "-t", cf.Docker.ContainerName, "pg_dump", "-d", cf.PgDBName, "-U", cf.PgUser, "-p", cf.PgPort, "-h", cf.PgHost, "-O", "-x", "-Ft")
+	} else {
+		cmd = exec.Command("pg_dump", "-d", cf.PgDBName, "-U", cf.PgUser, "-p", cf.PgPort, "-h", cf.PgHost, "-O", "-x", "-Ft")
+	}
+	filename = fmt.Sprintf("%d.tar", time.Now().Unix())
+	outfile, err = os.Create(filepath.Join(cf.DBBackupFolder, filename))
 	if err != nil {
 		log.Println(err.Error())
 		return
 	}
+
 	defer outfile.Close()
 	cmd.Stdout = outfile
 	cmd.Stderr = os.Stderr
