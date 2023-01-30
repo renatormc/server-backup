@@ -9,3 +9,22 @@ Nesse modo o programa irá utilizar o rdiff-backup que deve estar instalado tant
 ## utilizando rsync
 
 Nesse modo o programa irá apenas sincronizar uma pasta remota no servidor com uma local no cliente. Portanto o backup de fato deverá ser feito em um pasta no servidor utilizando uma rotina no scheduler do app, algum scriptt no cron, etc. Nesse modo apenas os valores de folder e backup_folder serão considerados no arquivo de configuração. As demais variáveis não serão utilizadas.
+
+
+# Exemplo serviço linux
+/etc/systemd/system/appname_backup.service
+```
+[Unit]
+Description=Server backup service
+After=network.target
+StartLimitIntervalSec=0
+[Service]
+Type=simple
+Restart=always
+RestartSec=1
+User=username
+ExecStart=server-backup scheduler appname -l
+
+[Install]
+WantedBy=multi-user.target
+```
