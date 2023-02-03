@@ -11,7 +11,7 @@
     "pg_db_name": "db_name",
     "pg_port": "5432",
     "pg_password": "****",
-    "gackup_times": [
+    "backup_times": [
         "22:41"
     ],
     "backup_db": true,

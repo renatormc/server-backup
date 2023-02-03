@@ -15,7 +15,7 @@ import (
 func BackupFiles() {
 	log.Println("Starting backup files")
 	cf := GetConfig()
-	cmd := exec.Command("rdiff-backup", cf.Folder, cf.FilesBackupFolder)
+	cmd := exec.Command("rdiff-backup", "--force", cf.Folder, cf.FilesBackupFolder)
 	cmd.Stdout = os.Stdout
 	cmd.Stderr = os.Stderr
 	cmd.Env = os.Environ()
