@@ -1,0 +1,10 @@
+version: "3.9"
+services:
+  server-backup:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ~/.ssh:/root/.ssh
+      - ${BACKUP_FOLDER}:/backup
+    command: ["backup", "${APP}"]

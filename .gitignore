@@ -4,3 +4,4 @@ dist/server-backup.exe
 dist/server-backup-wservice.exe
 dist/log.log
 dist/logs/*.log
+docker-compose.yaml

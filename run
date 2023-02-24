@@ -1,0 +1,2 @@
+#!/bin/bash
+APP=sinfweb BACKUP_FOLDER=/media/renato/charlie/backup_sinfweb docker compose -f docker-compose-rdiff.yaml up --build

@@ -1,6 +1,6 @@
 {
     "folder": "user@ip:/remote/folder",
-    "backup_folder": "/path/to/backup/folder",
+    "backup_folder": "/backup",
     "docker": {
         "use_postgres_docker": false,
         "container_name": "",
