@@ -1,2 +1,0 @@
-#!/bin/bash
-docker run -v .:/app -w /app -it golang:1.19-alpine go build -o ./dist/server-backup
