@@ -1,2 +1,3 @@
 #!/bin/bash
+docker build  -t server-backup . &&
 docker run -it -w=/app -v ./:/app server-backup go mod download && go build -o ./dist/server-backup
