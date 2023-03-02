@@ -39,6 +39,10 @@ func main() {
 
 	switch {
 	case schedulerCmd.Happened():
+		if cf.BackupAtStartup {
+			go DeleteOld()
+			BackupAll()
+		}
 
 		for _, t := range cf.BackupTimes {
 			err = gocron.Every(1).Day().At(t).Do(func() {

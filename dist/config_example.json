@@ -16,5 +16,6 @@
     ],
     "backup_db": true,
     "backup_files": true,
-    "days_before_delete": 30
+    "days_before_delete": 30,
+    "backup_at_startup": true
 }

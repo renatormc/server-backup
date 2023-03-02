@@ -14,6 +14,11 @@ RUN curl -fsSL https://www.postgresql.org/media/keys/ACCC4CF8.asc | gpg --dearmo
 RUN echo "deb [signed-by=/usr/share/keyrings/postgresql-keyring.gpg] http://apt.postgresql.org/pub/repos/apt/ bullseye-pgdg main" | tee /etc/apt/sources.list.d/postgresql.list
 RUN apt update -y
 RUN apt install postgresql-client-14 -y
+# RUN mkdir -p /root/.ssh
+# COPY ["/home/renato/.ssh/id_ed25519", "/root/id_ed25519"]
+# RUN chmod 700 -R /root/.ssh
+# RUN chmod +x /root/.ssh
+# RUN echo "Host github.com\n\tStrictHostKeyChecking no\n" >> /root/.ssh/config
 # COPY go.mod go.sum ./
 # RUN go mod download
 

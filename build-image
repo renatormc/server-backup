@@ -1,2 +1,2 @@
 #!/bin/bash
-docker build -t server-backup .
+docker build  -t server-backup .

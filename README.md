@@ -28,3 +28,11 @@ ExecStart=server-backup scheduler appname -l
 [Install]
 WantedBy=multi-user.target
 ```
+
+# Fix ssh
+
+```
+sudo chown root:$USER ~/.ssh/config
+sudo chmod 644 ~/.ssh/config
+
+```

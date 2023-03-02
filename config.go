@@ -29,6 +29,7 @@ type Config struct {
 	BackupDB          bool     `json:"backup_db"`
 	BackupFiles       bool     `json:"backup_files"`
 	DaysBeforeDelete  int64    `json:"days_before_delete"`
+	BackupAtStartup   bool     `json:"backup_at_startup"`
 }
 
 func GetConfig() Config {
